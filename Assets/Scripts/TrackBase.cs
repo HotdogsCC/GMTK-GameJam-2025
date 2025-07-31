@@ -14,6 +14,11 @@ public abstract class TrackBase : MonoBehaviour
         return exitTransform2.position;
     }
 
+    public Vector3 GetBezierPos()
+    {
+        return bezierTransform.position;
+    }
+
     public Vector3 GetPos()
     {
         return transform.position;
@@ -21,4 +26,5 @@ public abstract class TrackBase : MonoBehaviour
     
     [SerializeField] protected Transform exitTransform1;
     [SerializeField] protected Transform exitTransform2;
+    [SerializeField] protected Transform bezierTransform;
 }
