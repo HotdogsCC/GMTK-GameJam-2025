@@ -25,7 +25,7 @@ public class Train : MonoBehaviour
     private float t = 0;
 
     //used for a series of speeds based on where the train is
-    private float speeds;
+    private float[] speeds = new float[100];
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +70,7 @@ public class Train : MonoBehaviour
         transform.LookAt(newPosition);
         transform.position = newPosition;
         
-        t += actualMoveSpeed * Time.deltaTime;
+        t += GetCurrentSpeed(t) * Time.deltaTime;
         
         //are we finished?
         if (t >= 1.0f)
@@ -169,7 +169,7 @@ public class Train : MonoBehaviour
         Vector3 currentPosition;
 
         float percentage = 0.0f;
-        //break the curve into 10 segements to guesstimate the length
+        //break the curve into 100 segements to guesstimate the length
         for (int i = 1; i <= 100; i++)
         {
             percentage = i * 0.01f;
@@ -181,7 +181,9 @@ public class Train : MonoBehaviour
 
             calculatedDistance += Vector3.Distance(previousPosition, currentPosition);
 
-            Debug.Log(Vector3.Distance(previousPosition, currentPosition));
+            speeds[i - 1] = (0.01f / Vector3.Distance(previousPosition, currentPosition)) * moveSpeed;
+
+            //Debug.Log(Vector3.Distance(previousPosition, currentPosition));
 
             previousPosition = currentPosition;
         }
@@ -193,5 +195,18 @@ public class Train : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         car.EnableRunning();
+    }
+
+    private float GetCurrentSpeed(float myT)
+    {
+        myT *= 100;
+        int intT = Mathf.RoundToInt(myT);
+
+        if (intT >= 100)
+        {
+            intT = 99;
+        }
+
+        return speeds[intT];
     }
 }
