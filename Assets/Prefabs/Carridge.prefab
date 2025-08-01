@@ -220,8 +220,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.11966035, y: 0.17691779, z: 0.50257194}
+  m_Center: {x: 0.0035786554, y: 0.12525165, z: 0.0017892122}
 --- !u!114 &7477014104198889784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,4 +234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1e61fb2a82dfa41b21670df2a93e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastStartLocation: {fileID: 4803921101200173581}
+  carridgePrefab: {fileID: 5659773529694717438}
+  mesh: {fileID: 1747585076498316093}
+  redMat: {fileID: 2100000, guid: f0d8ceff71d9e4b4c9d29373688b51cd, type: 2}
+  greenMat: {fileID: 2100000, guid: eebfffffa6320cc4ebfc1c0acdf96c61, type: 2}
+  blueMat: {fileID: 2100000, guid: 1a5241f1d06e0b34bbf56489edaaee4a, type: 2}
+  myTrainColour: 0
