@@ -24,6 +24,9 @@ public class Train : MonoBehaviour
     private Vector3 targetPosition;
     private float t = 0;
 
+    //used for a series of speeds based on where the train is
+    private float speeds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -177,6 +180,8 @@ public class Train : MonoBehaviour
             + (Mathf.Pow(percentage, 2) * targetPosition);
 
             calculatedDistance += Vector3.Distance(previousPosition, currentPosition);
+
+            Debug.Log(Vector3.Distance(previousPosition, currentPosition));
 
             previousPosition = currentPosition;
         }

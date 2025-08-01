@@ -357,6 +357,11 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4266090655265549570, guid: d33552b82da57df4c8bc54c7d8fb11cd,
+        type: 3}
+      propertyPath: carridgeLagTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4467145045922410759, guid: d33552b82da57df4c8bc54c7d8fb11cd,
         type: 3}
       propertyPath: m_LocalPosition.x
