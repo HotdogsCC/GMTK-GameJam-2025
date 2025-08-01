@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1050853766078599059}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,6 +344,37 @@ Transform:
   - {fileID: 7767907410527116418}
   m_Father: {fileID: 7155859836748492872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4691706177485068635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6497749928682559199}
+  m_Layer: 6
+  m_Name: Guarenteed Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6497749928682559199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691706177485068635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7155859836748492872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5564109108381235713
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +387,7 @@ GameObject:
   - component: {fileID: 6906564501968807450}
   - component: {fileID: 5146025082815772877}
   - component: {fileID: 8660564076410850522}
-  - component: {fileID: 3224085855213790048}
+  - component: {fileID: 5968321037718546372}
   m_Layer: 6
   m_Name: CornerToY
   m_TagString: Untagged
@@ -380,6 +411,7 @@ Transform:
   - {fileID: 5344866628880764511}
   - {fileID: 8228083691106759548}
   - {fileID: 4699857776775874851}
+  - {fileID: 6497749928682559199}
   - {fileID: 1908757886931442787}
   - {fileID: 5034988123913312419}
   - {fileID: 5377449206715583362}
@@ -456,7 +488,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3224085855213790048
+--- !u!114 &5968321037718546372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,12 +497,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564109108381235713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56786e2e6241be84a86cfcbab88bd619, type: 3}
+  m_Script: {fileID: 11500000, guid: 4723c2a4b568a6145a7ca738f764828d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   exitTransform1: {fileID: 8228083691106759548}
   exitTransform2: {fileID: 4699857776775874851}
   bezierTransform: {fileID: 5344866628880764511}
+  guarenteedExit: {fileID: 6497749928682559199}
+  leftMesh: {fileID: 5666534541921072787}
+  rightMesh: {fileID: 348554999210926353}
+  exitLeft: 1
+  selectedMaterial: {fileID: -2846015902132820636, guid: 1e2245ed199bc3e4bb46920a198fde4d,
+    type: 3}
+  unselectedMaterial: {fileID: 2100000, guid: c6a476d157006314cab515cd0331fd78, type: 2}
 --- !u!1 &6879031334066059717
 GameObject:
   m_ObjectHideFlags: 0

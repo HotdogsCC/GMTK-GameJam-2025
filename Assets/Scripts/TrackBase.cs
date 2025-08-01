@@ -4,15 +4,9 @@ using UnityEngine;
 
 public abstract class TrackBase : MonoBehaviour
 {
-    public Vector3 GetExit1Pos()
-    {
-        return exitTransform1.position;
-    }
-    
-    public Vector3 GetExit2Pos()
-    {
-        return exitTransform2.position;
-    }
+    public abstract Vector3 GetExit1Pos();
+
+    public abstract Vector3 GetExit2Pos();
 
     public Vector3 GetBezierPos()
     {

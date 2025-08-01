@@ -139,38 +139,14 @@ public class TrackBuilder : EditorWindow
         GUILayout.Label("Debugger");
         if (GUILayout.Button("View Debug Tracks"))
         {
-            TrackBase[] tracks = FindObjectsOfType<TrackBase>();
-            List<Vector3> trackPositions = new List<Vector3>();
-            foreach (TrackBase track in tracks)
+            DebugTracks();
+        }
+        if (GUILayout.Button("Set Materials on Switching Tracks"))
+        {
+            SwitchingTrainTrack[] tracks = FindObjectsOfType<SwitchingTrainTrack>();
+            foreach (SwitchingTrainTrack track in tracks)
             {
-                //check for overlaps
-                foreach (Vector3 pos in trackPositions)
-                {
-                    if (track.GetPos() == pos)
-                    {
-                        Debug.LogWarning("You have an overlapping train track at: " + pos);
-                        
-                        Vector3 TexitPos1 = track.GetExit1Pos();
-                        Vector3 TexitPos2 = track.GetExit2Pos();
-
-                        TexitPos1.y += 0.2f;
-                        TexitPos2.y += 0.2f;
-                        
-                        Debug.DrawLine(TexitPos1, TexitPos2, Color.red, 5.0f);
-                        return;
-                    }
-                }
-
-                trackPositions.Add(track.GetPos());
-                
-                Vector3 exitPos1 = track.GetExit1Pos();
-                Vector3 exitPos2 = track.GetExit2Pos();
-
-                exitPos1.y += 0.1f;
-                exitPos2.y += 0.1f;
-                
-                Debug.DrawLine(exitPos1, exitPos2, Color.green, 5.0f);
-                
+                track.SetActiveTrackMaterial();
             }
         }
         GUILayout.Label(" ");
@@ -443,6 +419,55 @@ public class TrackBuilder : EditorWindow
         }
 
         return toReturn;
+    }
+
+    private void DebugTracks()
+    {
+        TrackBase[] tracks = FindObjectsOfType<TrackBase>();
+        List<Vector3> trackPositions = new List<Vector3>();
+        foreach (TrackBase track in tracks)
+        {
+            //check for overlaps
+            foreach (Vector3 pos in trackPositions)
+            {
+                if (track.GetPos() == pos)
+                {
+                    Debug.LogWarning("You have an overlapping train track at: " + pos);
+
+                    Vector3 TexitPos1 = track.GetExit1Pos();
+                    Vector3 TexitPos2 = track.GetExit2Pos();
+
+                    TexitPos1.y += 0.2f;
+                    TexitPos2.y += 0.2f;
+
+                    Debug.DrawLine(TexitPos1, TexitPos2, Color.red, 5.0f);
+                    return;
+                }
+            }
+
+            trackPositions.Add(track.GetPos());
+
+            Vector3 exitPos1 = track.GetExit1Pos();
+            Vector3 exitPos2 = track.GetExit2Pos();
+
+            exitPos1.y += 0.1f;
+            exitPos2.y += 0.1f;
+
+            Debug.DrawLine(exitPos1, exitPos2, Color.green, 5.0f);
+
+            //is it a switching track?
+            SwitchingTrainTrack switchingTrack;
+            if(track.TryGetComponent<SwitchingTrainTrack>(out switchingTrack))
+            {
+                exitPos2 = switchingTrack.GetInactiveExit();
+                exitPos2.y += 0.1f;
+
+                Debug.DrawLine(exitPos1, exitPos2, Color.magenta, 5.0f);
+                
+            }
+            
+
+        }
     }
 }
 

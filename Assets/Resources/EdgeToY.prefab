@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4699857776775874851}
   m_Layer: 6
-  m_Name: Exit 2
+  m_Name: Exit 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,6 +311,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3852350961418294800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4732303107775123680}
+  m_Layer: 6
+  m_Name: Exit 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4732303107775123680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852350961418294800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7155859836748492872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4134292336939359933
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +387,7 @@ GameObject:
   - component: {fileID: 6906564501968807450}
   - component: {fileID: 5146025082815772877}
   - component: {fileID: 8660564076410850522}
-  - component: {fileID: 3224085855213790048}
+  - component: {fileID: 1065536440555213208}
   m_Layer: 6
   m_Name: EdgeToY
   m_TagString: Untagged
@@ -380,6 +411,7 @@ Transform:
   - {fileID: 5344866628880764511}
   - {fileID: 8228083691106759548}
   - {fileID: 4699857776775874851}
+  - {fileID: 4732303107775123680}
   - {fileID: 1908757886931442787}
   - {fileID: 5034988123913312419}
   - {fileID: 5377449206715583362}
@@ -456,7 +488,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3224085855213790048
+--- !u!114 &1065536440555213208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,12 +497,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564109108381235713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56786e2e6241be84a86cfcbab88bd619, type: 3}
+  m_Script: {fileID: 11500000, guid: 4723c2a4b568a6145a7ca738f764828d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitTransform1: {fileID: 8228083691106759548}
-  exitTransform2: {fileID: 4699857776775874851}
+  exitTransform1: {fileID: 4699857776775874851}
+  exitTransform2: {fileID: 4732303107775123680}
   bezierTransform: {fileID: 5344866628880764511}
+  guarenteedExit: {fileID: 8228083691106759548}
+  leftMesh: {fileID: 348554999210926353}
+  rightMesh: {fileID: 5666534541921072787}
+  exitLeft: 1
+  selectedMaterial: {fileID: -2846015902132820636, guid: 1e2245ed199bc3e4bb46920a198fde4d,
+    type: 3}
+  unselectedMaterial: {fileID: 2100000, guid: c6a476d157006314cab515cd0331fd78, type: 2}
 --- !u!1 &6879031334066059717
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8228083691106759548}
   m_Layer: 6
-  m_Name: Exit 1
+  m_Name: Guarenteed Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -71,11 +71,47 @@ public class Train : MonoBehaviour
         {
             //get the track class
             TrackBase track = hit.transform.GetComponent<TrackBase>();
-            
+
+            bezierPosition = track.GetBezierPos();
+
+            t = 0.0f;
+
+            //is it a switching track?
+            SwitchingTrainTrack switchingTrack;
+            if(track.TryGetComponent<SwitchingTrainTrack>(out switchingTrack))
+            {
+                //are we closer to in the inactive track?
+                //i.e. are we travelling into the merge
+                if(Vector3.Distance(transform.position, switchingTrack.GetInactiveExit()) 
+                    < Vector3.Distance(transform.position, switchingTrack.GetExit2Pos())
+                    &&
+                    Vector3.Distance(transform.position, switchingTrack.GetInactiveExit())
+                    < Vector3.Distance(transform.position, switchingTrack.GetExit1Pos()))
+               
+                {
+                    //travel into the merge
+                    targetPosition = track.GetExit1Pos();
+                    entrancePosition = switchingTrack.GetInactiveExit();
+
+                    return;
+                }
+
+            }
+
+            //is it an intersection?
+            IntersectionTrack intersection;
+            if(track.TryGetComponent<IntersectionTrack>(out intersection))
+            {
+                entrancePosition = intersection.GetEnterancePoint(transform.position);
+                targetPosition = intersection.GetExitPoint(transform.position);
+
+                return;
+            }
+
             //see which target is further away
             float exit1Distance = Vector3.Distance(transform.position, track.GetExit1Pos());
             float exit2Distance = Vector3.Distance(transform.position, track.GetExit2Pos());
-            
+
             //if exit 1 is further away, travel there
             if (exit1Distance > exit2Distance)
             {
@@ -88,12 +124,6 @@ public class Train : MonoBehaviour
                 entrancePosition = track.GetExit1Pos();
             }
 
-            bezierPosition = track.GetBezierPos();
-
-            t = 0.0f; 
-            
-            //look at the target
-            //transform.LookAt(targetPosition);
         }
     }
 }
