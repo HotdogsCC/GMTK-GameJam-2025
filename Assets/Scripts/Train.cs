@@ -98,6 +98,16 @@ public class Train : MonoBehaviour
 
             }
 
+            //is it an intersection?
+            IntersectionTrack intersection;
+            if(track.TryGetComponent<IntersectionTrack>(out intersection))
+            {
+                entrancePosition = intersection.GetEnterancePoint(transform.position);
+                targetPosition = intersection.GetExitPoint(transform.position);
+
+                return;
+            }
+
             //see which target is further away
             float exit1Distance = Vector3.Distance(transform.position, track.GetExit1Pos());
             float exit2Distance = Vector3.Distance(transform.position, track.GetExit2Pos());
