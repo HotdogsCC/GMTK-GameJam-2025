@@ -392,8 +392,7 @@ MonoBehaviour:
   leftMesh: {fileID: 1516065773297628976}
   rightMesh: {fileID: 3002273885233920525}
   exitLeft: 1
-  selectedMaterial: {fileID: -2846015902132820636, guid: 1e2245ed199bc3e4bb46920a198fde4d,
-    type: 3}
+  selectedMaterial: {fileID: 2100000, guid: 07dcfa2f62501b54fae821fb54accfa9, type: 2}
   unselectedMaterial: {fileID: 2100000, guid: c6a476d157006314cab515cd0331fd78, type: 2}
 --- !u!1 &7772915294289268125
 GameObject:
