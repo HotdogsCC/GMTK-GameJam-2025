@@ -2,90 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Train : MonoBehaviour
+public class Carridge : MonoBehaviour
 {
-    [Header("Attributes")] 
-    [SerializeField] private float moveSpeed = 1.0f;
-    //scaled move speed based on the distance
-    private float actualMoveSpeed;
-    
-    [Header("raycast")]
     [SerializeField] private Transform raycastStartLocation;
-
-    [Header("Carridges")]
-    [SerializeField] float carridgeAmount = 0;
-    [SerializeField] float carridgeLagTime = 0.45f;
-    [SerializeField] GameObject carridgePrefab;
-    private List<Carridge> carridges = new List<Carridge>();
-    private int carridgesRunning = 0;
-
+    private float moveSpeed;
+    private float actualMoveSpeed;
     private Vector3 entrancePosition;
     private Vector3 bezierPosition;
     private Vector3 targetPosition;
     private float t = 0;
+    private bool isRunning = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public void EnableRunning()
     {
-        if (raycastStartLocation == null)
-        {
-            Debug.LogWarning("add the raycast start location to the train");
-        }
+        isRunning = true;
+    }
 
-        for(int i = 0; i < carridgeAmount; i++)
-        {
-            GameObject carridgeInstance = Instantiate(carridgePrefab, transform.position, transform.rotation);
-           
-            Carridge car = carridgeInstance.GetComponent<Carridge>();
-            car.SetMoveSpeed(moveSpeed);
+    
 
-            carridges.Add(car);
+    public void SetMoveSpeed(float _moveSpeed)
+    {
+        moveSpeed = _moveSpeed;
 
-            StartCoroutine(LagCarridge(car, (carridgeLagTime * (i + 1))));
-        }
-
-        actualMoveSpeed = moveSpeed;
-        
         FindNewTarget();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveCar()
     {
-        //move towards target
-        //float frameMoveSpeed = moveSpeed * Time.deltaTime;
-        
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, frameMoveSpeed);
-        
-        //lerp with bezier
-        
+        if(!isRunning)
+        {
+            return;
+        }
+
         Vector3 newPosition =
             (Mathf.Pow(1 - t, 2) * entrancePosition)
             + (2 * (1 - t) * t * bezierPosition)
             + (Mathf.Pow(t, 2) * targetPosition);
-        
+
         transform.LookAt(newPosition);
         transform.position = newPosition;
-        
+
         t += actualMoveSpeed * Time.deltaTime;
-        
+
         //are we finished?
         if (t >= 1.0f)
         {
             FindNewTarget();
         }
-
-        foreach(Carridge car in carridges)
-        {
-            car.MoveCar();
-        }
-            
-        
-        //are we at the target?
-        //if (transform.position == targetPosition)
-        //{
-         //   FindNewTarget();
-       // }
     }
 
     private void FindNewTarget()
@@ -103,16 +66,16 @@ public class Train : MonoBehaviour
 
             //is it a switching track?
             SwitchingTrainTrack switchingTrack;
-            if(track.TryGetComponent<SwitchingTrainTrack>(out switchingTrack))
+            if (track.TryGetComponent<SwitchingTrainTrack>(out switchingTrack))
             {
                 //are we closer to in the inactive track?
                 //i.e. are we travelling into the merge
-                if(Vector3.Distance(transform.position, switchingTrack.GetInactiveExit()) 
+                if (Vector3.Distance(transform.position, switchingTrack.GetInactiveExit())
                     < Vector3.Distance(transform.position, switchingTrack.GetExit2Pos())
                     &&
                     Vector3.Distance(transform.position, switchingTrack.GetInactiveExit())
                     < Vector3.Distance(transform.position, switchingTrack.GetExit1Pos()))
-               
+
                 {
                     //travel into the merge
                     targetPosition = track.GetExit1Pos();
@@ -127,7 +90,7 @@ public class Train : MonoBehaviour
 
             //is it an intersection?
             IntersectionTrack intersection;
-            if(track.TryGetComponent<IntersectionTrack>(out intersection))
+            if (track.TryGetComponent<IntersectionTrack>(out intersection))
             {
                 entrancePosition = intersection.GetEnterancePoint(transform.position);
                 targetPosition = intersection.GetExitPoint(transform.position);
@@ -182,11 +145,5 @@ public class Train : MonoBehaviour
         }
 
         actualMoveSpeed = (1.0f / calculatedDistance) * moveSpeed;
-    }
-
-    IEnumerator LagCarridge(Carridge car, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        car.EnableRunning();
     }
 }
