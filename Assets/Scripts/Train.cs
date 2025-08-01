@@ -8,7 +8,8 @@ public enum TrainColour
 {
     Red,
     Green,
-    Blue
+    Blue,
+    White
 }
 
 public class Train : MonoBehaviour
@@ -32,6 +33,7 @@ public class Train : MonoBehaviour
     private Vector3 bezierPosition;
     private Vector3 targetPosition;
     private float t = 0;
+    private int people = 0;
 
     
 
@@ -75,6 +77,17 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CreateCarridge();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            DestoryCarridges();
+            
+        }
+        
         mercyTime -= Time.deltaTime;
         if (mercyTime <= 0.0f)
         {
@@ -241,6 +254,12 @@ public class Train : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //if didnt collied with a train
+        if (other.gameObject.layer != 7)
+        {
+            return;
+        }
+        
         if (mercyTime > 0.0f)
         {
             return;
@@ -249,5 +268,62 @@ public class Train : MonoBehaviour
         Debug.Log("Game over!");
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void CreateCarridge()
+    {
+        carridgeAmount++;
+        mercyTime = 1.0f;
+
+        //if we dont have a carridge
+        if (carridge == null)
+        { 
+            GameObject carridgeInstance = Instantiate(carridgePrefab, transform.position, transform.rotation);
+
+            carridge = carridgeInstance.GetComponent<Carridge>();
+            carridge.SetThisBadBoyUp(carridgeLagTime, moveSpeed, myTrainColour);
+        }
+        else
+        {
+            carridge.CreateChild(carridgeAmount);
+            carridge.SetThisBadBoyUp(carridgeLagTime, moveSpeed, myTrainColour);
+        }
+        
+        
+        
+       
+        
+    }
+
+    private void DestoryCarridges()
+    {
+        carridgeAmount = 0;
+        timeStamps.Clear();
+        if (carridge != null)
+        {
+            carridge.DestroyCarridge();
+            carridge = null;
+        }
+    }
+    
+    public TrainColour GetColour()
+    {
+        return myTrainColour;
+    }
+
+    public int GetPeople()
+    {
+        return people;
+    }
+
+    public void AddPeople(int toAdd)
+    {
+        people += toAdd;
+    }
+
+    public void TakePeople()
+    {
+        people = 0;
+        DestoryCarridges();
     }
 }

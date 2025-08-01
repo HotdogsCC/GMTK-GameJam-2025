@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Carridge : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Carridge : MonoBehaviour
     [SerializeField] private Material blueMat;
 
     public TrainColour myTrainColour;
+
+    private bool isDestroying = false;
+    private float scale = 1.0f;
 
     public void SetThisBadBoyUp(float _carLag, float _moveSpeed, TrainColour _colour)
     {
@@ -52,6 +56,19 @@ public class Carridge : MonoBehaviour
 
     private void Update()
     {
+        if (isDestroying)
+        {
+            scale -= Time.deltaTime;
+            if (scale <= 0.0f)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            transform.localScale = new Vector3(scale, scale, scale);
+            return;
+        }
+        
         if (carridgeChild)
         {
             timeStamps.Enqueue(new TimeStampData
@@ -97,5 +114,17 @@ public class Carridge : MonoBehaviour
         
         
         
+    }
+
+    public void DestroyCarridge()
+    {
+        if (carridgeChild != null)
+        {
+            carridgeChild.DestroyCarridge();
+        }
+
+        GetComponent<BoxCollider>().enabled = false;
+
+        isDestroying = true;
     }
 }
