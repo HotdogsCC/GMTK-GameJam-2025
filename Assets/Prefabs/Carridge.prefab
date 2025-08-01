@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158936420396376033}
-  m_Mesh: {fileID: -8336599035457844097, guid: 1e2245ed199bc3e4bb46920a198fde4d, type: 3}
+  m_Mesh: {fileID: 3765197094983456265, guid: 1e2245ed199bc3e4bb46920a198fde4d, type: 3}
 --- !u!23 &1747585076498316093
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 4949673708684789854}
   - component: {fileID: 3956733214875266550}
   - component: {fileID: 7918303271861399173}
-  - component: {fileID: 4266090655265549570}
+  - component: {fileID: 7477014104198889784}
   m_Layer: 7
-  m_Name: Train
+  m_Name: Carridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4266090655265549570
+--- !u!114 &7477014104198889784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,12 +231,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5659773529694717438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90154c42a25b394099b5af5a4ee52f4, type: 3}
+  m_Script: {fileID: 11500000, guid: ed1e61fb2a82dfa41b21670df2a93e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
   raycastStartLocation: {fileID: 4803921101200173581}
-  carridgeAmount: 0
-  carridgeLagTime: 0.2
-  carridgePrefab: {fileID: 5659773529694717438, guid: 9e6dbd20c1b44fc448d310d40729e232,
-    type: 3}
