@@ -1,11 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum TrainColour
+{
+    Red,
+    Green,
+    Blue
+}
 
 public class Train : MonoBehaviour
 {
     [Header("Attributes")] 
     [SerializeField] private float moveSpeed = 1.0f;
+    [SerializeField] private TrainColour myTrainColour;
     //scaled move speed based on the distance
     private float actualMoveSpeed;
     
@@ -13,19 +23,32 @@ public class Train : MonoBehaviour
     [SerializeField] private Transform raycastStartLocation;
 
     [Header("Carridges")]
-    [SerializeField] float carridgeAmount = 0;
+    [SerializeField] int carridgeAmount = 0;
     [SerializeField] float carridgeLagTime = 0.45f;
     [SerializeField] GameObject carridgePrefab;
-    private List<Carridge> carridges = new List<Carridge>();
-    private int carridgesRunning = 0;
+    private Carridge carridge;
 
     private Vector3 entrancePosition;
     private Vector3 bezierPosition;
     private Vector3 targetPosition;
     private float t = 0;
 
+    
+
     //used for a series of speeds based on where the train is
     private float[] speeds = new float[100];
+    
+    //used for data about the carridge
+    private struct TimeStampData
+    {
+        public float timeStamp;
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+
+    private Queue<TimeStampData> timeStamps = new Queue<TimeStampData>();
+
+    private float mercyTime = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,16 +58,13 @@ public class Train : MonoBehaviour
             Debug.LogWarning("add the raycast start location to the train");
         }
 
-        for(int i = 0; i < carridgeAmount; i++)
+        if (carridgeAmount > 0)
         {
             GameObject carridgeInstance = Instantiate(carridgePrefab, transform.position, transform.rotation);
            
-            Carridge car = carridgeInstance.GetComponent<Carridge>();
-            car.SetMoveSpeed(moveSpeed);
-
-            carridges.Add(car);
-
-            StartCoroutine(LagCarridge(car, (carridgeLagTime * (i + 1))));
+            carridge = carridgeInstance.GetComponent<Carridge>();
+            carridge.SetThisBadBoyUp(carridgeLagTime, moveSpeed, myTrainColour);
+            carridge.CreateChild(carridgeAmount);
         }
 
         actualMoveSpeed = moveSpeed;
@@ -55,12 +75,11 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move towards target
-        //float frameMoveSpeed = moveSpeed * Time.deltaTime;
-        
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, frameMoveSpeed);
-        
-        //lerp with bezier
+        mercyTime -= Time.deltaTime;
+        if (mercyTime <= 0.0f)
+        {
+            mercyTime = 0.0f;
+        }
         
         Vector3 newPosition =
             (Mathf.Pow(1 - t, 2) * entrancePosition)
@@ -77,18 +96,34 @@ public class Train : MonoBehaviour
         {
             FindNewTarget();
         }
-
-        foreach(Carridge car in carridges)
-        {
-            car.MoveCar();
-        }
-            
         
-        //are we at the target?
-        //if (transform.position == targetPosition)
-        //{
-         //   FindNewTarget();
-       // }
+        
+
+        if (carridge)
+        {
+            timeStamps.Enqueue(new TimeStampData
+            {
+                timeStamp = Time.time,
+                position = transform.position,
+                rotation = transform.rotation
+            });
+            
+            TimeStampData newTimeStamp = default;
+            bool iDidAThing = false;
+            while (timeStamps.Count != 0 && timeStamps.Peek().timeStamp + (carridgeLagTime / moveSpeed) < Time.time)
+            {
+                iDidAThing = true;
+                newTimeStamp = timeStamps.Dequeue();
+            }
+
+            if (iDidAThing)
+            {
+                carridge.transform.position = newTimeStamp.position;
+                carridge.transform.rotation = newTimeStamp.rotation;
+            }
+        }
+        
+        
     }
 
     private void FindNewTarget()
@@ -190,13 +225,7 @@ public class Train : MonoBehaviour
 
         actualMoveSpeed = (1.0f / calculatedDistance) * moveSpeed;
     }
-
-    IEnumerator LagCarridge(Carridge car, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        car.EnableRunning();
-    }
-
+    
     private float GetCurrentSpeed(float myT)
     {
         myT *= 100;
@@ -208,5 +237,17 @@ public class Train : MonoBehaviour
         }
 
         return speeds[intT];
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (mercyTime > 0.0f)
+        {
+            return;
+        }
+        
+        Debug.Log("Game over!");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -1,149 +1,101 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Carridge : MonoBehaviour
 {
-    [SerializeField] private Transform raycastStartLocation;
+    [SerializeField] private GameObject carridgePrefab;
+    private Carridge carridgeChild = null;
+
+    private float carridgeLagTime;
     private float moveSpeed;
-    private float actualMoveSpeed;
-    private Vector3 entrancePosition;
-    private Vector3 bezierPosition;
-    private Vector3 targetPosition;
-    private float t = 0;
-    private bool isRunning = false;
 
-    public void EnableRunning()
+    [SerializeField] private MeshRenderer mesh;
+
+    [Header("Materials")] 
+    [SerializeField] private Material redMat;
+    [SerializeField] private Material greenMat;
+    [SerializeField] private Material blueMat;
+
+    public TrainColour myTrainColour;
+
+    public void SetThisBadBoyUp(float _carLag, float _moveSpeed, TrainColour _colour)
     {
-        isRunning = true;
-    }
-
-    
-
-    public void SetMoveSpeed(float _moveSpeed)
-    {
+        carridgeLagTime = _carLag;
         moveSpeed = _moveSpeed;
+        myTrainColour = _colour;
 
-        FindNewTarget();
-    }
-
-    public void MoveCar()
-    {
-        if(!isRunning)
+        switch (myTrainColour)
         {
-            return;
-        }
-
-        Vector3 newPosition =
-            (Mathf.Pow(1 - t, 2) * entrancePosition)
-            + (2 * (1 - t) * t * bezierPosition)
-            + (Mathf.Pow(t, 2) * targetPosition);
-
-        transform.LookAt(newPosition);
-        transform.position = newPosition;
-
-        t += actualMoveSpeed * Time.deltaTime;
-
-        //are we finished?
-        if (t >= 1.0f)
-        {
-            FindNewTarget();
+            case TrainColour.Red:
+                mesh.material = redMat;
+                break;
+            case TrainColour.Green:
+                mesh.material = greenMat;
+                break;
+            case TrainColour.Blue:
+                mesh.material = blueMat;
+                break;
+            
         }
     }
-
-    private void FindNewTarget()
+    
+    private struct TimeStampData
     {
-        //check the track underneath us
-        RaycastHit hit;
-        if (Physics.Raycast(raycastStartLocation.position, Vector3.down, out hit, 3.0f, 64))
+        public float timeStamp;
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+
+    private Queue<TimeStampData> timeStamps = new Queue<TimeStampData>();
+
+    private void Update()
+    {
+        if (carridgeChild)
         {
-            //get the track class
-            TrackBase track = hit.transform.GetComponent<TrackBase>();
-
-            bezierPosition = track.GetBezierPos();
-
-            t = 0.0f;
-
-            //is it a switching track?
-            SwitchingTrainTrack switchingTrack;
-            if (track.TryGetComponent<SwitchingTrainTrack>(out switchingTrack))
+            timeStamps.Enqueue(new TimeStampData
             {
-                //are we closer to in the inactive track?
-                //i.e. are we travelling into the merge
-                if (Vector3.Distance(transform.position, switchingTrack.GetInactiveExit())
-                    < Vector3.Distance(transform.position, switchingTrack.GetExit2Pos())
-                    &&
-                    Vector3.Distance(transform.position, switchingTrack.GetInactiveExit())
-                    < Vector3.Distance(transform.position, switchingTrack.GetExit1Pos()))
-
-                {
-                    //travel into the merge
-                    targetPosition = track.GetExit1Pos();
-                    entrancePosition = switchingTrack.GetInactiveExit();
-
-                    SetActualMoveSpeed();
-
-                    return;
-                }
-
+                timeStamp = Time.time,
+                position = transform.position,
+                rotation = transform.rotation
+            });
+            
+            TimeStampData newTimeStamp = default;
+            bool iDidAThing = false;
+            while (timeStamps.Count != 0 && timeStamps.Peek().timeStamp + (carridgeLagTime / moveSpeed) < Time.time)
+            {
+                iDidAThing = true;
+                newTimeStamp = timeStamps.Dequeue();
             }
 
-            //is it an intersection?
-            IntersectionTrack intersection;
-            if (track.TryGetComponent<IntersectionTrack>(out intersection))
+            if (iDidAThing)
             {
-                entrancePosition = intersection.GetEnterancePoint(transform.position);
-                targetPosition = intersection.GetExitPoint(transform.position);
-
-                SetActualMoveSpeed();
-
-                return;
+                carridgeChild.transform.position = newTimeStamp.position;
+                carridgeChild.transform.rotation = newTimeStamp.rotation;
             }
-
-            //see which target is further away
-            float exit1Distance = Vector3.Distance(transform.position, track.GetExit1Pos());
-            float exit2Distance = Vector3.Distance(transform.position, track.GetExit2Pos());
-
-            //if exit 1 is further away, travel there
-            if (exit1Distance > exit2Distance)
-            {
-                targetPosition = track.GetExit1Pos();
-                entrancePosition = track.GetExit2Pos();
-            }
-            else
-            {
-                targetPosition = track.GetExit2Pos();
-                entrancePosition = track.GetExit1Pos();
-            }
-
-            SetActualMoveSpeed();
-
         }
     }
 
-    private void SetActualMoveSpeed()
+    public void CreateChild(int numberOfKidsLeft)
     {
-        float calculatedDistance = 0.0f;
-
-        Vector3 previousPosition = entrancePosition;
-        Vector3 currentPosition;
-
-        float percentage = 0.0f;
-        //break the curve into 10 segements to guesstimate the length
-        for (int i = 1; i <= 100; i++)
+        numberOfKidsLeft -= 1;
+        if (numberOfKidsLeft > 0) 
         {
-            percentage = i * 0.01f;
-
-            currentPosition =
-            (Mathf.Pow(1 - percentage, 2) * entrancePosition)
-            + (2 * (1 - percentage) * percentage * bezierPosition)
-            + (Mathf.Pow(percentage, 2) * targetPosition);
-
-            calculatedDistance += Vector3.Distance(previousPosition, currentPosition);
-
-            previousPosition = currentPosition;
+            if (carridgeChild == null)
+            {
+                GameObject carridgeInstance = Instantiate(carridgePrefab, transform.position, transform.rotation);
+           
+                carridgeChild = carridgeInstance.GetComponent<Carridge>();
+                
+            }
+            carridgeChild.SetThisBadBoyUp(carridgeLagTime, moveSpeed, myTrainColour);
+            
+            carridgeChild.CreateChild(numberOfKidsLeft);
         }
-
-        actualMoveSpeed = (1.0f / calculatedDistance) * moveSpeed;
+        
+        
+        
+        
     }
 }
