@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89a327ab47cec242b05d84c98ca47be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsNeededForRedTrain: 100
+  isUsingRed: 0
+  isUsingGreen: 1
+  isUsingBlue: 1
+  trainPrefab: {fileID: 5659773529694717438, guid: d33552b82da57df4c8bc54c7d8fb11cd,
+    type: 3}
