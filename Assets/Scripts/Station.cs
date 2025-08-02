@@ -29,14 +29,19 @@ public class Station : MonoBehaviour
 
     private void Start()
     {
-        possibleColours.Add(TrainColour.Red);
-        possibleColours.Add(TrainColour.Green);
-        possibleColours.Add(TrainColour.Blue);
+        mesh = GetComponent<MeshRenderer>();
+        stationManager = FindObjectOfType<StationManager>();
+        
+        if(stationManager.isUsingRed)
+            possibleColours.Add(TrainColour.Red);
+        if(stationManager.isUsingGreen)
+            possibleColours.Add(TrainColour.Green);
+        if(stationManager.isUsingBlue)
+            possibleColours.Add(TrainColour.Blue);
         
         StartCoroutine(SpawnPerson());
         
-        mesh = GetComponent<MeshRenderer>();
-        stationManager = FindObjectOfType<StationManager>();
+        
         if (stationManager == null)
         {
             Debug.LogWarning("Please add a Station Manager object to the scene");
@@ -91,6 +96,18 @@ public class Station : MonoBehaviour
         
         myColour = col;
         
+        //if there is a person of this colour, remove them them
+        for (int i = 0; i < peopleColours.Length; i++)
+        {
+            //is this the colour of the train?
+            if (peopleColours[i] == myColour)
+            {
+                peopleColours[i] = TrainColour.White;
+                peopleWaiting--;
+                spawnLocations[i].SetActive(false);
+            }
+        }
+        
         //set the material of the roof
         
         switch (myColour)
@@ -98,48 +115,14 @@ public class Station : MonoBehaviour
             case TrainColour.Red:
                 mesh.material = redMat;
                 possibleColours.Remove(TrainColour.Red);
-                
-                //if there is a person of this colour, change them
-                for (int i = 0; i < peopleColours.Length; i++)
-                {
-                    //is this the colour of the train?
-                    if (peopleColours[i] == TrainColour.Red)
-                    {
-                        peopleColours[i] = TrainColour.Green;
-                        spawnLocations[i].GetComponent<MeshRenderer>().material = greenMat;
-                    }
-                }
-                
                 break;
             case TrainColour.Green:
                 mesh.material = greenMat;
                 possibleColours.Remove(TrainColour.Green);
-                
-                //if there is a person of this colour, change them
-                for (int i = 0; i < peopleColours.Length; i++)
-                {
-                    //is this the colour of the train?
-                    if (peopleColours[i] == TrainColour.Green)
-                    {
-                        peopleColours[i] = TrainColour.Blue;
-                        spawnLocations[i].GetComponent<MeshRenderer>().material = blueMat;
-                    }
-                }
                 break;
             case TrainColour.Blue:
                 mesh.material = blueMat;
                 possibleColours.Remove(TrainColour.Blue);
-                
-                //if there is a person of this colour, change them
-                for (int i = 0; i < peopleColours.Length; i++)
-                {
-                    //is this the colour of the train?
-                    if (peopleColours[i] == TrainColour.Blue)
-                    {
-                        peopleColours[i] = TrainColour.Red;
-                        spawnLocations[i].GetComponent<MeshRenderer>().material = redMat;
-                    }
-                }
                 break;
             case TrainColour.White:
                 mesh.material = whiteMat;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class StationManager : MonoBehaviour
 {
+    [Header("Available Colours")] 
+    [SerializeField] public bool isUsingRed = true;
+    [SerializeField] public bool isUsingGreen = true;
+    [SerializeField] public bool isUsingBlue = true;
+    
     private GameManager gameManager;
     private Station[] stations;
     private List<Station> uncolouredStations = new List<Station>();

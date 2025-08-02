@@ -23,7 +23,8 @@ public class Train : MonoBehaviour
     [Header("raycast")]
     [SerializeField] private Transform raycastStartLocation;
 
-    [Header("Carridges")]
+    [Header("Carridges")] 
+    [SerializeField] private int peoplePerCarriage = 4;
     [SerializeField] int carridgeAmount = 0;
     [SerializeField] float carridgeLagTime = 0.45f;
     [SerializeField] GameObject carridgePrefab;
@@ -77,16 +78,6 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CreateCarridge();
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DestoryCarridges();
-            
-        }
         
         mercyTime -= Time.deltaTime;
         if (mercyTime <= 0.0f)
@@ -319,6 +310,28 @@ public class Train : MonoBehaviour
     public void AddPeople(int toAdd)
     {
         people += toAdd;
+
+        //figure out the amount of carriages we should have
+        int desiredCarriages = 1;
+        int tempPeople = people;
+        while (tempPeople > peoplePerCarriage)
+        {
+            tempPeople -= peoplePerCarriage;
+            desiredCarriages++;
+        }
+
+        //do we have the right amount  of carriages?
+        if (desiredCarriages != carridgeAmount)
+        {
+            desiredCarriages -= carridgeAmount;
+
+            while (desiredCarriages > 0)
+            {
+                CreateCarridge();
+                desiredCarriages -= 1;
+            }
+        }
+        
         Debug.Log("train has people: " + people);
     }
 
