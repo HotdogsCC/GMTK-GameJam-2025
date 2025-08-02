@@ -319,6 +319,7 @@ public class Train : MonoBehaviour
     public void AddPeople(int toAdd)
     {
         people += toAdd;
+        Debug.Log("train has people: " + people);
     }
 
     public void TakePeople()
