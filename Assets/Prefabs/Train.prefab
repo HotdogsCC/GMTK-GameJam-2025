@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07dcfa2f62501b54fae821fb54accfa9, type: 2}
+  - {fileID: 2100000, guid: f0d8ceff71d9e4b4c9d29373688b51cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   moveSpeed: 1
   myTrainColour: 0
   raycastStartLocation: {fileID: 4803921101200173581}
+  peoplePerCarriage: 4
   carridgeAmount: 0
   carridgeLagTime: 0.6
   carridgePrefab: {fileID: 5659773529694717438, guid: 9e6dbd20c1b44fc448d310d40729e232,
