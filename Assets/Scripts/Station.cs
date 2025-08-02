@@ -188,4 +188,9 @@ public class Station : MonoBehaviour
     {
         return pointsNeededForActivation;
     }
+
+    public void AddRed()
+    {
+        possibleColours.Add(TrainColour.Red);
+    }
 }
