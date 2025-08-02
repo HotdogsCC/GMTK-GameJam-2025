@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private int pointsNeededForDoubleSpeed = 50;
     [SerializeField] private TextMeshProUGUI pointsText;
+    [SerializeField] private GameObject canvas;
+    private bool controlsAreDisplayed = true;
     private int points = 0;
     private MusicPlayer musicPlayer;
 
@@ -17,9 +19,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddPoints(1);
+            controlsAreDisplayed = !controlsAreDisplayed;
+            canvas.SetActive(controlsAreDisplayed);
+            
         }
         
         if (Input.GetKey(KeyCode.Space))

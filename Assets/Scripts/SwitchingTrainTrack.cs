@@ -7,6 +7,8 @@ public class SwitchingTrainTrack : TrackBase
     [SerializeField] private Transform guarenteedExit;
     [SerializeField] private MeshRenderer leftMesh;
     [SerializeField] private MeshRenderer rightMesh;
+    [SerializeField] private MeshRenderer leftIndicator;
+    [SerializeField] private MeshRenderer rightIndicator;
     private MusicPlayer musicPlayer; 
 
     [Header("Set Me! Set Me!")]
@@ -58,20 +60,24 @@ public class SwitchingTrainTrack : TrackBase
     {
         musicPlayer = FindObjectOfType<MusicPlayer>();
         
+        leftMesh.material = selectedMaterial;
+        rightMesh.material = selectedMaterial;
+        
         SetActiveTrackMaterial();
     }
 
     public void SetActiveTrackMaterial()
     {
+        
         if(exitLeft)
         {
-            leftMesh.material = selectedMaterial;
-            rightMesh.material = unselectedMaterial;
+            leftIndicator.enabled = true;
+            rightIndicator.enabled = false;
         }
         else
         {
-            leftMesh.material = unselectedMaterial;
-            rightMesh.material = selectedMaterial;
+            leftIndicator.enabled = false;
+            rightIndicator.enabled = true;
         }
     }
 
