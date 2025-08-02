@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StationManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class StationManager : MonoBehaviour
     private GameManager gameManager;
     private Station[] stations;
     private List<Station> uncolouredStations = new List<Station>();
+    private List<Station> inactiveStations = new List<Station>();
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,13 @@ public class StationManager : MonoBehaviour
 
         foreach (var station in stations)
         {
+            if (station.GetPointsNeeded() != 0)
+            {
+                inactiveStations.Add(station);
+                station.GetComponent<MeshRenderer>().enabled = false;
+                station.GetComponent<BoxCollider>().enabled = false;
+            }
+            
             if (station.GetColour() == TrainColour.White)
             {
                 uncolouredStations.Add(station);
@@ -35,7 +44,21 @@ public class StationManager : MonoBehaviour
 
     public void DropOff(Station station, int pointsToAdd)
     {
+        //add the points
         gameManager.AddPoints(pointsToAdd);
+        
+        //see if any stations can be activated
+        foreach (var inactiveStation in inactiveStations.ToList())
+        {
+            if (inactiveStation.GetPointsNeeded() <= gameManager.GetPoints())
+            {
+                inactiveStation.GetComponent<MeshRenderer>().enabled = true;
+                inactiveStation.GetComponent<BoxCollider>().enabled = true;
+                uncolouredStations.Add(inactiveStation);
+                inactiveStation.StartCoroutine(inactiveStation.SpawnPerson());
+                inactiveStations.Remove(inactiveStation);
+            }
+        }
         
         TrainColour stationTeam = station.GetColour();
         
