@@ -258,7 +258,7 @@ public class Train : MonoBehaviour
         
         Debug.Log("Game over!");
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StaticObjectHolder.theGameManager.EndGame();
     }
 
     private void CreateCarridge()
