@@ -7,6 +7,7 @@ public class SwitchingTrainTrack : TrackBase
     [SerializeField] private Transform guarenteedExit;
     [SerializeField] private MeshRenderer leftMesh;
     [SerializeField] private MeshRenderer rightMesh;
+    private MusicPlayer musicPlayer; 
 
     [Header("Set Me! Set Me!")]
     [SerializeField] private bool exitLeft = true;
@@ -46,12 +47,17 @@ public class SwitchingTrainTrack : TrackBase
     {
         //flips the value of exitLeft
         exitLeft = !exitLeft;
+        
+        //plays the sound
+        musicPlayer.PlaySnap();
 
         SetActiveTrackMaterial();
     }
 
     private void Start()
     {
+        musicPlayer = FindObjectOfType<MusicPlayer>();
+        
         SetActiveTrackMaterial();
     }
 
