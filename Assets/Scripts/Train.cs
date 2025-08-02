@@ -332,7 +332,6 @@ public class Train : MonoBehaviour
             }
         }
         
-        Debug.Log("train has people: " + people);
     }
 
     public void TakePeople()

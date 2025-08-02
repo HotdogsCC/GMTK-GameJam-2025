@@ -55,4 +55,9 @@ public class GameManager : MonoBehaviour
 
         currentTimeScale = speed;
     }
+
+    public int GetPoints()
+    {
+        return points;
+    }
 }

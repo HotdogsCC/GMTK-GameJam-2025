@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,6 +9,7 @@ public class Station : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private TrainColour myColour;
+    [SerializeField] private int pointsNeededForActivation = 0;
     [SerializeField] private float minSpawnTime = 5.0f;
     [SerializeField] private float maxSpawnTime = 10.0f;
 
@@ -38,16 +40,18 @@ public class Station : MonoBehaviour
             possibleColours.Add(TrainColour.Green);
         if(stationManager.isUsingBlue)
             possibleColours.Add(TrainColour.Blue);
-        
-        StartCoroutine(SpawnPerson());
+
+        if (pointsNeededForActivation == 0)
+        {
+            StartCoroutine(SpawnPerson());
+        }
         
         
         if (stationManager == null)
         {
             Debug.LogWarning("Please add a Station Manager object to the scene");
         }
-       
-
+        
         foreach (var spawnLocation in spawnLocations)
         {
             spawnLocation.SetActive(false);
@@ -135,12 +139,13 @@ public class Station : MonoBehaviour
         return myColour;
     }
 
-    private IEnumerator SpawnPerson()
+    public IEnumerator SpawnPerson()
     {
         yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-
+        
+        
         //is there room to spawn a person?
-        if (peopleWaiting < spawnLocations.Length)
+        if (peopleWaiting < spawnLocations.Length && possibleColours.Count != 0)
         {
             //find an empty spot
             for (int i = 0; i < peopleColours.Length; i++)
@@ -177,5 +182,10 @@ public class Station : MonoBehaviour
         }
 
         return whiteMat;
+    }
+
+    public int GetPointsNeeded()
+    {
+        return pointsNeededForActivation;
     }
 }

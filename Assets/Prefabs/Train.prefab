@@ -238,6 +238,7 @@ MonoBehaviour:
   moveSpeed: 1
   myTrainColour: 0
   raycastStartLocation: {fileID: 4803921101200173581}
+  peoplePerCarriage: 4
   carridgeAmount: 0
   carridgeLagTime: 0.6
   carridgePrefab: {fileID: 5659773529694717438, guid: 9e6dbd20c1b44fc448d310d40729e232,
