@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
+        
         Time.timeScale = currentTimeScale;
         
         musicPlayer = FindObjectOfType<MusicPlayer>();
@@ -41,6 +44,8 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Please add the Music Player into the scene");
         }
         pointsText.text = "Points: " + points.ToString();
+        
+        StaticObjectHolder.theGameManager = this;
     }
 
     public void AddPoints(int toAdd)
@@ -54,10 +59,18 @@ public class GameManager : MonoBehaviour
         float speed = (float)points / (float)pointsNeededForDoubleSpeed + 1.0f;
 
         currentTimeScale = speed;
+        
+        StaticObjectHolder.theScoreSystem.Score = points;
     }
 
     public int GetPoints()
     {
         return points;
+    }
+    
+    public void EndGame()
+    {
+        StaticObjectHolder.theScoreSystem.SaveScore();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
