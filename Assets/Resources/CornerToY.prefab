@@ -289,7 +289,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2846015902132820636, guid: 1e2245ed199bc3e4bb46920a198fde4d, type: 3}
+  - {fileID: 2100000, guid: 07dcfa2f62501b54fae821fb54accfa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -507,8 +507,7 @@ MonoBehaviour:
   leftMesh: {fileID: 5666534541921072787}
   rightMesh: {fileID: 348554999210926353}
   exitLeft: 1
-  selectedMaterial: {fileID: -2846015902132820636, guid: 1e2245ed199bc3e4bb46920a198fde4d,
-    type: 3}
+  selectedMaterial: {fileID: 2100000, guid: 07dcfa2f62501b54fae821fb54accfa9, type: 2}
   unselectedMaterial: {fileID: 2100000, guid: c6a476d157006314cab515cd0331fd78, type: 2}
 --- !u!1 &6879031334066059717
 GameObject:
@@ -571,7 +570,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2846015902132820636, guid: 1e2245ed199bc3e4bb46920a198fde4d, type: 3}
+  - {fileID: 2100000, guid: 07dcfa2f62501b54fae821fb54accfa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
