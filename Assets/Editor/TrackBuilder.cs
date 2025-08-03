@@ -24,6 +24,8 @@ public class TrackBuilder : EditorWindow
         DiaRightY,
         Plus,
         X,
+        FlatXLeft,
+        FlatXRight,
         SIZE
     }
     
@@ -51,6 +53,8 @@ public class TrackBuilder : EditorWindow
     private GameObject diaRightYPrefab;
     private GameObject plusPrefab;
     private GameObject xPrefab;
+    private GameObject flatXLeftPrefab;
+    private GameObject flatXRightPrefab;
     
     //what prefab is selected?
     private ESelectedPrefab selectedPrefab;
@@ -107,6 +111,8 @@ public class TrackBuilder : EditorWindow
             diaRightYPrefab = Resources.Load("DiaRightY").GameObject();
             plusPrefab = Resources.Load("Plus").GameObject();
             xPrefab = Resources.Load("X").GameObject();
+            flatXLeftPrefab = Resources.Load("FlatXLeft").GameObject();
+            flatXRightPrefab = Resources.Load("FlatXRight").GameObject();
             
         }
         regularTrainTrackPrefab = EditorGUILayout.ObjectField("Regular Train Track Prefab", 
@@ -133,6 +139,10 @@ public class TrackBuilder : EditorWindow
             plusPrefab, typeof(GameObject), false) as GameObject;
         xPrefab = EditorGUILayout.ObjectField("X Prefab", 
             xPrefab, typeof(GameObject), false) as GameObject;
+        flatXLeftPrefab = EditorGUILayout.ObjectField("Flat X Left Prefab", 
+            flatXLeftPrefab, typeof(GameObject), false) as GameObject;
+        flatXRightPrefab = EditorGUILayout.ObjectField("Flat X Right Prefab", 
+            flatXRightPrefab, typeof(GameObject), false) as GameObject;
         GUILayout.Label(" ");
 
         //list the debuggers
@@ -234,6 +244,14 @@ public class TrackBuilder : EditorWindow
         if (GUILayout.Button("X Track"))
         {
             ChangeSelection(ESelectedPrefab.X);
+        }
+        if (GUILayout.Button("Flat X Left"))
+        {
+            ChangeSelection(ESelectedPrefab.FlatXLeft);
+        }
+        if (GUILayout.Button("Flat X Right"))
+        {
+            ChangeSelection(ESelectedPrefab.FlatXRight);
         }
          
         
@@ -410,6 +428,14 @@ public class TrackBuilder : EditorWindow
             
             case ESelectedPrefab.X:
                 toReturn = xPrefab;
+                break;
+            
+            case ESelectedPrefab.FlatXLeft:
+                toReturn = flatXLeftPrefab;
+                break;
+            
+            case ESelectedPrefab.FlatXRight:
+                toReturn = flatXRightPrefab;
                 break;
         }
 
