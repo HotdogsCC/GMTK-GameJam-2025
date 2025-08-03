@@ -17,8 +17,11 @@ public class Train : MonoBehaviour
     [Header("Attributes")] 
     [SerializeField] private float moveSpeed = 1.0f;
     [SerializeField] private TrainColour myTrainColour;
-    //scaled move speed based on the distance
-    private float actualMoveSpeed;
+    [Range(0.0f, 1.0f)]
+    [SerializeField] private float carriageSpeedMultiplier = 0.25f;
+
+    private float myTime;
+    private float myTimeScale;
     
     [Header("raycast")]
     [SerializeField] private Transform raycastStartLocation;
@@ -56,6 +59,9 @@ public class Train : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myTime = 0.0f;
+        myTimeScale = 1.0f;
+        
         if (raycastStartLocation == null)
         {
             Debug.LogWarning("add the raycast start location to the train");
@@ -69,8 +75,6 @@ public class Train : MonoBehaviour
             carridge.SetThisBadBoyUp(carridgeLagTime, moveSpeed, myTrainColour);
             carridge.CreateChild(carridgeAmount);
         }
-
-        actualMoveSpeed = moveSpeed;
         
         FindNewTarget();
     }
@@ -78,6 +82,18 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        myTime += Time.deltaTime * myTimeScale;
+
+        if (Input.GetKeyDown(KeyCode.Y) && myTrainColour == TrainColour.Green)
+        {
+            CreateCarridge();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.U) && myTrainColour == TrainColour.Green)
+        {
+            DestoryCarridges();
+        }
+        
         
         mercyTime -= Time.deltaTime;
         if (mercyTime <= 0.0f)
@@ -93,7 +109,7 @@ public class Train : MonoBehaviour
         transform.LookAt(newPosition);
         transform.position = newPosition;
         
-        t += GetCurrentSpeed(t) * Time.deltaTime;
+        t += GetCurrentSpeed(t) * Time.deltaTime * myTimeScale;
         
         //are we finished?
         if (t >= 1.0f)
@@ -105,16 +121,18 @@ public class Train : MonoBehaviour
 
         if (carridge)
         {
+            carridge.UpdateMyTime(myTime);
+            
             timeStamps.Enqueue(new TimeStampData
             {
-                timeStamp = Time.time,
+                timeStamp = myTime,
                 position = transform.position,
                 rotation = transform.rotation
             });
             
             TimeStampData newTimeStamp = default;
             bool iDidAThing = false;
-            while (timeStamps.Count != 0 && timeStamps.Peek().timeStamp + (carridgeLagTime / moveSpeed) < Time.time)
+            while (timeStamps.Count != 0 && timeStamps.Peek().timeStamp + (carridgeLagTime / moveSpeed) < myTime)
             {
                 iDidAThing = true;
                 newTimeStamp = timeStamps.Dequeue();
@@ -226,8 +244,6 @@ public class Train : MonoBehaviour
 
             previousPosition = currentPosition;
         }
-
-        actualMoveSpeed = (1.0f / calculatedDistance) * moveSpeed;
     }
     
     private float GetCurrentSpeed(float myT)
@@ -266,6 +282,8 @@ public class Train : MonoBehaviour
         carridgeAmount++;
         mercyTime = 1.0f;
 
+        myTimeScale = 1.0f + (carriageSpeedMultiplier * carridgeAmount);
+
         //if we dont have a carridge
         if (carridge == null)
         { 
@@ -290,6 +308,8 @@ public class Train : MonoBehaviour
             carridge.DestroyCarridge();
             carridge = null;
         }
+
+        myTimeScale = 1.0f;
     }
     
     public TrainColour GetColour()

@@ -11,6 +11,8 @@ public class Carridge : MonoBehaviour
 
     private float carridgeLagTime;
     private float moveSpeed;
+    
+    private float myTime;
 
     [SerializeField] private MeshRenderer mesh;
 
@@ -73,14 +75,14 @@ public class Carridge : MonoBehaviour
         {
             timeStamps.Enqueue(new TimeStampData
             {
-                timeStamp = Time.time,
+                timeStamp = myTime,
                 position = transform.position,
                 rotation = transform.rotation
             });
             
             TimeStampData newTimeStamp = default;
             bool iDidAThing = false;
-            while (timeStamps.Count != 0 && timeStamps.Peek().timeStamp + (carridgeLagTime / moveSpeed) < Time.time)
+            while (timeStamps.Count != 0 && timeStamps.Peek().timeStamp + (carridgeLagTime / moveSpeed) < myTime)
             {
                 iDidAThing = true;
                 newTimeStamp = timeStamps.Dequeue();
@@ -126,5 +128,15 @@ public class Carridge : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
 
         isDestroying = true;
+    }
+
+    public void UpdateMyTime(float newTime)
+    {
+        if (carridgeChild)
+        {
+            carridgeChild.UpdateMyTime(newTime);
+        }
+
+        myTime = newTime;
     }
 }

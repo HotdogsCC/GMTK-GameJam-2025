@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   myTrainColour: 0
+  carriageSpeedMultiplier: 0.1
   raycastStartLocation: {fileID: 4803921101200173581}
   peoplePerCarriage: 4
   carridgeAmount: 0
