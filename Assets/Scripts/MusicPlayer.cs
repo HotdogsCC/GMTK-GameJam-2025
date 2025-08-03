@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,12 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private int pointsNeededForDoubleSpeed;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource snapSource;
-    
+
+    private void Start()
+    {
+        UpdateSpeed(0);
+    }
+
     public void UpdateSpeed(int points)
     {
         if (points > pointsNeededForDoubleSpeed)
