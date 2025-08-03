@@ -38,6 +38,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 009b13bf03700c3419a22d868d665eb8
+    name: MusicVolume
   - guid: a248e4386e1c30e4abd63545e6be62bf
     name: Pitch
   m_AudioMixerGroupViews:

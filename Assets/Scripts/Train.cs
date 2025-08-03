@@ -270,7 +270,8 @@ public class Train : MonoBehaviour
         
         Debug.Log("Game over!");
 
-        StaticObjectHolder.theGameManager.EndGame();
+        if (StaticObjectHolder.theGameManager)
+            StaticObjectHolder.theGameManager.EndGame();
     }
 
     private void CreateCarridge()

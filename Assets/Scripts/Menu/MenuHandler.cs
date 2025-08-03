@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace Menu
 {
@@ -30,9 +31,11 @@ namespace Menu
         public TMP_Dropdown resolutionDropdown;
         private Resolution[] resolutions;
 
-        [Header("-- Audio --")]
-        [Tooltip("The master audio mixer")]
-        public AudioMixer masterMixer;
+        [FormerlySerializedAs("masterMixer"),Header("-- Audio --")]
+        [Tooltip("The music audio mixer")]
+        public AudioMixer MusicMixer;
+        [Tooltip("the sound effects audio mixer")]
+        public AudioMixer SFXMixer;
 
         [Header("-- Menu Objects --")]
         [SerializeField, Tooltip("The options menu.")]
@@ -77,19 +80,20 @@ namespace Menu
         /// <summary>
         /// if the options menu is open, go back to the menu, if not exit that menu
         /// </summary>
-        public void MenuGoBack()
+        public void MenuGoBack(bool force = false)
         {
             //if we are in the menu, dont do anything
-            if (SceneManager.GetActiveScene().buildIndex == 0)
+            if (SceneManager.GetActiveScene().buildIndex == 0 && !force)
             {
                 return;
             }
-            
+
             EventSystem.current.SetSelectedGameObject(null);
             if (OptionsMenu.activeInHierarchy)
             {
-                //CloseOptionsMenu();
+                CloseOptionsMenu();
             }
+            
                 
             else
             {
@@ -144,9 +148,9 @@ namespace Menu
         #region Volume
         public void ChangeSFXVolume(float _volume)
         {
-            if (masterMixer)
+            if (SFXMixer)
             {
-                masterMixer.SetFloat("SFXVolume", _volume);
+                SFXMixer.SetFloat("SFXVolume", _volume);
                 PlayerPrefs.SetFloat("SFXVolume", _volume);
                 PlayerPrefs.Save();
             }
@@ -154,9 +158,9 @@ namespace Menu
 
         public void ChangeMusicVolume(float _volume)
         {
-            if (masterMixer)
+            if (MusicMixer)
             {
-                masterMixer.SetFloat("MusicVolume", _volume);
+                MusicMixer.SetFloat("MusicVolume", _volume);
                 PlayerPrefs.SetFloat("MusicVolume", _volume);
                 PlayerPrefs.Save();
             }
@@ -164,12 +168,22 @@ namespace Menu
 
         public void SetMute(bool isMuted)
         {
-            if (masterMixer)
+            if (MusicMixer)
             {
                 if (isMuted)
-                    masterMixer.SetFloat("MasterVolume", -80f);
+                    MusicMixer.SetFloat("MusicVolume", -80f);
                 else
-                    masterMixer.SetFloat("MasterVolume", 0f);
+                    MusicMixer.SetFloat("MusicVolume", 0f);
+                PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
+                PlayerPrefs.Save();
+            }
+
+            if(SFXMixer)
+            {
+                if (isMuted)
+                    SFXMixer.SetFloat("SFXVolume", -80f);
+                else
+                    SFXMixer.SetFloat("SFXVolume", 0f);
                 PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
                 PlayerPrefs.Save();
             }
