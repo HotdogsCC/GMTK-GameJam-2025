@@ -686,7 +686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2C
+  m_text: B3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79ac7086e68abb64eb984832c1cdc5ef, type: 2}
   m_sharedMaterial: {fileID: 57527073575981647, guid: 79ac7086e68abb64eb984832c1cdc5ef,
@@ -1196,7 +1196,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: LevelB1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &435467963
@@ -2284,7 +2284,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: LevelA2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &864488193
@@ -2491,7 +2491,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: LevelA1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &914504177
@@ -2624,7 +2624,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: LevelB2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1131635895
@@ -3566,7 +3566,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: LevelB3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1494674806
@@ -3812,7 +3812,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1A
+  m_text: A1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79ac7086e68abb64eb984832c1cdc5ef, type: 2}
   m_sharedMaterial: {fileID: 57527073575981647, guid: 79ac7086e68abb64eb984832c1cdc5ef,
@@ -3947,7 +3947,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1B
+  m_text: A2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79ac7086e68abb64eb984832c1cdc5ef, type: 2}
   m_sharedMaterial: {fileID: 57527073575981647, guid: 79ac7086e68abb64eb984832c1cdc5ef,
@@ -4235,7 +4235,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2A
+  m_text: B1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79ac7086e68abb64eb984832c1cdc5ef, type: 2}
   m_sharedMaterial: {fileID: 57527073575981647, guid: 79ac7086e68abb64eb984832c1cdc5ef,
@@ -6892,7 +6892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2B
+  m_text: B2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79ac7086e68abb64eb984832c1cdc5ef, type: 2}
   m_sharedMaterial: {fileID: 57527073575981647, guid: 79ac7086e68abb64eb984832c1cdc5ef,
