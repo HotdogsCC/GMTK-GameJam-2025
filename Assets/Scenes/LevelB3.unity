@@ -11440,6 +11440,11 @@ PrefabInstance:
       objectReference: {fileID: 1490177150}
     - target: {fileID: 179149619325875389, guid: 8fb506efa66198149a931099f9ccbc45,
         type: 3}
+      propertyPath: pointsNeededForDoubleSpeed
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 179149619325875389, guid: 8fb506efa66198149a931099f9ccbc45,
+        type: 3}
       propertyPath: tutorialElements.Array.size
       value: 6
       objectReference: {fileID: 0}
