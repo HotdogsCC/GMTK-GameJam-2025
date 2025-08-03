@@ -38,26 +38,27 @@ public class StationManager : MonoBehaviour
             redTrainTransforms.Add(tempTransform);
             redTrain.SetActive(false);
         }
-        
+    
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager == null)
         {
             Debug.LogWarning("Please add a Game Manager to the scene");
         }
-        
+    
         stations = FindObjectsOfType<Station>();
         trains = FindObjectsOfType<Train>();
 
         foreach (var station in stations)
         {
+            // If a station needs points to activate, it's inactive.
             if (station.GetPointsNeeded() != 0)
             {
                 inactiveStations.Add(station);
                 station.GetComponent<MeshRenderer>().enabled = false;
                 station.GetComponent<BoxCollider>().enabled = false;
             }
-            
-            if (station.GetColour() == TrainColour.White)
+            // An active station can be uncoloured.
+            else if (station.GetColour() == TrainColour.White)
             {
                 uncolouredStations.Add(station);
             }

@@ -279,11 +279,6 @@ public class Train : MonoBehaviour
             carridge.CreateChild(carridgeAmount);
             carridge.SetThisBadBoyUp(carridgeLagTime, moveSpeed, myTrainColour);
         }
-        
-        
-        
-       
-        
     }
 
     private void DestoryCarridges()

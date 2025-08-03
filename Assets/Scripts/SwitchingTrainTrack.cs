@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine;
+
 public class SwitchingTrainTrack : TrackBase
 {
     [SerializeField] private Transform guarenteedExit;
     [SerializeField] private MeshRenderer leftMesh;
     [SerializeField] private MeshRenderer rightMesh;
+    
+    [Header("Indicator Control")]
+    [SerializeField] private SwitchIndicator switchIndicator;
+
+    [Header("Old Indicator Renderers")]
     [SerializeField] private MeshRenderer leftIndicator;
     [SerializeField] private MeshRenderer rightIndicator;
+    
     private MusicPlayer musicPlayer; 
 
     [Header("Set Me! Set Me!")]
@@ -16,6 +24,22 @@ public class SwitchingTrainTrack : TrackBase
     [SerializeField] private Material selectedMaterial;
     [SerializeField] private Material unselectedMaterial;
 
+    public void SetActiveTrackMaterial()
+    {
+        if (leftIndicator == null || rightIndicator == null) return;
+
+        if(exitLeft)
+        {
+            leftIndicator.enabled = true;
+            rightIndicator.enabled = false;
+        }
+        else
+        {
+            leftIndicator.enabled = false;
+            rightIndicator.enabled = true;
+        }
+    }
+    
     public override Vector3 GetExit1Pos()
     {
         return guarenteedExit.position;
@@ -47,13 +71,12 @@ public class SwitchingTrainTrack : TrackBase
 
     public void FlipExit()
     {
-        //flips the value of exitLeft
         exitLeft = !exitLeft;
         
-        //plays the sound
-        musicPlayer.PlaySnap();
+        if(musicPlayer != null)
+            musicPlayer.PlaySnap();
 
-        SetActiveTrackMaterial();
+        UpdateIndicatorState();
     }
 
     private void Start()
@@ -63,21 +86,31 @@ public class SwitchingTrainTrack : TrackBase
         leftMesh.material = selectedMaterial;
         rightMesh.material = selectedMaterial;
         
-        SetActiveTrackMaterial();
+        // Set the initial state of the indicator without animation
+        if (switchIndicator != null)
+        {
+            if (exitLeft)
+            {
+                switchIndicator.SetLeft();
+            }
+            else
+            {
+                switchIndicator.SetRight();
+            }
+        }
     }
-
-    public void SetActiveTrackMaterial()
+    
+    public void UpdateIndicatorState()
     {
+        if(switchIndicator == null) return;
         
         if(exitLeft)
         {
-            leftIndicator.enabled = true;
-            rightIndicator.enabled = false;
+            switchIndicator.SwitchToLeft();
         }
         else
         {
-            leftIndicator.enabled = false;
-            rightIndicator.enabled = true;
+            switchIndicator.SwitchToRight();
         }
     }
 
