@@ -255,14 +255,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scriptedMessages:
   - Welcome to Chugga Loop!
-  - Your job is to pick up passengers of your colour, and bring them to their station.
-  - Toggle to switch with left click to direct the train towards the passengers.
+  - Your job is to pick up passengers and bring them to their station.
+  - Toggle the track switch with a left click to direct the train towards the passengers.
   - Awesome work!
-  - In order to act on climate change, trains are all pedal powered by the passengers.
-  - This means that your train will travel faster with more people.
-  - Deliever passengers, and don't let trains crash!
-  - Hold right click and move the mouse to move around the scene
-  - Use the scroll wheel to zoom
+  - Be careful, trains will get faster with more people on board.
+  - Also, colours matter. Green trains pick up green people, and drops them off at
+    green stations.
+  - Don't worry, trains are still able to pass stations that don't match their colour.
+  - Hold right click and move the mouse to move around the scene.
+  - Use the scroll wheel to zoom.
   - Hold down the middle mouse button and move the mouse to orbit.
   - Press R to return to a birdseye view.
   - Hold space to speed up the game.
