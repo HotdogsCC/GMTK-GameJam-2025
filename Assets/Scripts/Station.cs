@@ -24,6 +24,7 @@ public class Station : MonoBehaviour
     [SerializeField] private Material greenMat;
     [SerializeField] private Material blueMat;
     [SerializeField] private Material whiteMat;
+    [SerializeField] public GameObject neighbouringBuildings;
 
     [Header("Particles")] 
     [SerializeField] private GameObject redParticles;

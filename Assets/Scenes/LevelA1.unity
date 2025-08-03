@@ -298,6 +298,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 751f83e286a412a4e8dfc50fcdf4f3e6, type: 3}
+--- !u!1 &22414127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 545501839975371467, guid: 751f83e286a412a4e8dfc50fcdf4f3e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 22414126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &25635892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -849,6 +855,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 280736123518435300}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1077,6 +1088,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2s1 (1) Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 545501839975371467, guid: 751f83e286a412a4e8dfc50fcdf4f3e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6185741043493297111, guid: 751f83e286a412a4e8dfc50fcdf4f3e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1132,6 +1148,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 751f83e286a412a4e8dfc50fcdf4f3e6, type: 3}
+--- !u!1 &129309793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 545501839975371467, guid: 751f83e286a412a4e8dfc50fcdf4f3e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 129309792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &132630266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2309,6 +2331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
         type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 6348435015088487495}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
       propertyPath: pointsNeededForActivation
       value: 100
       objectReference: {fileID: 0}
@@ -3100,6 +3127,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 6645416528762763951}
     - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
         type: 3}
       propertyPath: pointsNeededForActivation
@@ -4165,6 +4197,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station
       objectReference: {fileID: 0}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 129309793}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4579,6 +4616,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 1434721878}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5963,6 +6005,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 1493491240}
     - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
         type: 3}
       propertyPath: pointsNeededForActivation
@@ -10429,6 +10476,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 205dd121c4cf89641bdaaed13db285b4, type: 3}
+--- !u!1 &1434721878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6897082121039639011, guid: 205dd121c4cf89641bdaaed13db285b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1434721877}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1439831337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11004,6 +11057,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6e5333f51e7ce744a76cf27b06dd6ea, type: 3}
+--- !u!1 &1493491240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 596175074199619641, guid: c6e5333f51e7ce744a76cf27b06dd6ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1493491239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1497205386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7155859836748492872, guid: ce9c5a598611dc84f9138eb321a34e7e,
@@ -13644,6 +13703,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
         type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 2019807648811528049}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
       propertyPath: pointsNeededForActivation
       value: 60
       objectReference: {fileID: 0}
@@ -14123,6 +14187,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
+        type: 3}
+      propertyPath: neighbouringBuildings
+      value: 
+      objectReference: {fileID: 22414127}
     - target: {fileID: 4156698403589296332, guid: 0652dfa52549eaa46bb19180bafab9c6,
         type: 3}
       propertyPath: pointsNeededForActivation
@@ -14841,6 +14910,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d267d242ae02d346a258e634364e8e1, type: 3}
+--- !u!1 &280736123518435300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2141072373550295101, guid: 0d267d242ae02d346a258e634364e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 280736123518435299}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1698122716676434281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14977,6 +15052,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6e5333f51e7ce744a76cf27b06dd6ea, type: 3}
+--- !u!1 &2019807648811528049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 596175074199619641, guid: c6e5333f51e7ce744a76cf27b06dd6ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 2019807648811528048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2261429473655969216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15317,6 +15398,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19dda45f6f532b84492a72a081d69e4d, type: 3}
+--- !u!1 &6348435015088487495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6061085878126763383, guid: 19dda45f6f532b84492a72a081d69e4d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6348435015088487494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6645416528762763950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15385,6 +15472,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01b9930a1c6d1d14e936e35484579fd6, type: 3}
+--- !u!1 &6645416528762763951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1129157418367262036, guid: 01b9930a1c6d1d14e936e35484579fd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6645416528762763950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

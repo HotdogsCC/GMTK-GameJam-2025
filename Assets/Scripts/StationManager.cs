@@ -60,6 +60,7 @@ public class StationManager : MonoBehaviour
                 inactiveStations.Add(station);
                 station.GetComponent<MeshRenderer>().enabled = false;
                 station.GetComponent<BoxCollider>().enabled = false;
+                station.neighbouringBuildings.SetActive(false);
             }
             // An active station can be uncoloured.
             else if (station.GetColour() == TrainColour.White)
@@ -83,6 +84,7 @@ public class StationManager : MonoBehaviour
             {
                 inactiveStation.GetComponent<MeshRenderer>().enabled = true;
                 inactiveStation.GetComponent<BoxCollider>().enabled = true;
+                inactiveStation.neighbouringBuildings.SetActive(true);
                 Instantiate(regularParticles, inactiveStation.transform.position, inactiveStation.transform.rotation);
                 uncolouredStations.Add(inactiveStation);
                 inactiveStation.StartCoroutine(inactiveStation.SpawnPerson());
