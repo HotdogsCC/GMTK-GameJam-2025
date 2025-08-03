@@ -83,16 +83,6 @@ public class Train : MonoBehaviour
     void Update()
     {
         myTime += Time.deltaTime * myTimeScale;
-
-        if (Input.GetKeyDown(KeyCode.Y) && myTrainColour == TrainColour.Green)
-        {
-            CreateCarridge();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.U) && myTrainColour == TrainColour.Green)
-        {
-            DestoryCarridges();
-        }
         
         
         mercyTime -= Time.deltaTime;

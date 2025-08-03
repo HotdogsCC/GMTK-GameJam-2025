@@ -30,11 +30,6 @@ public class GameManager : MonoBehaviour
             //canvas.SetActive(controlsAreDisplayed);
         }
         
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            AddPoints(10);
-        }
-        
         if (Input.GetKey(KeyCode.Space))
         {
             Time.timeScale = currentTimeScale * 2.0f;
