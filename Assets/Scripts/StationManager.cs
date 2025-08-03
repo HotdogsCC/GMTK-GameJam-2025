@@ -18,6 +18,10 @@ public class StationManager : MonoBehaviour
     [Header("Train Prefab Reference")] [SerializeField]
     private GameObject trainPrefab;
     
+    [Header("Particles")] 
+    [SerializeField] private GameObject confettiParticles;
+    [SerializeField] private GameObject regularParticles;
+    
     private GameManager gameManager;
     private Station[] stations;
     private List<Station> uncolouredStations = new List<Station>();
@@ -67,6 +71,8 @@ public class StationManager : MonoBehaviour
 
     public void DropOff(Station station, int pointsToAdd)
     {
+        Instantiate(confettiParticles, station.transform.position, station.transform.rotation);
+        
         //add the points
         gameManager.AddPoints(pointsToAdd);
         
@@ -77,6 +83,7 @@ public class StationManager : MonoBehaviour
             {
                 inactiveStation.GetComponent<MeshRenderer>().enabled = true;
                 inactiveStation.GetComponent<BoxCollider>().enabled = true;
+                Instantiate(regularParticles, inactiveStation.transform.position, inactiveStation.transform.rotation);
                 uncolouredStations.Add(inactiveStation);
                 inactiveStation.StartCoroutine(inactiveStation.SpawnPerson());
                 inactiveStations.Remove(inactiveStation);
