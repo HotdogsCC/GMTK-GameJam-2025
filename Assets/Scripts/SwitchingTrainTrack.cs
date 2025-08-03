@@ -115,7 +115,7 @@ public class SwitchingTrainTrack : TrackBase
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && Time.timeScale != 0.0f)
         {
             FlipExit();
         }

@@ -91,7 +91,8 @@ public class Tutorial : MonoBehaviour
     {
         if (popUpIndex >= scriptedMessages.Length)
         {
-            SceneManager.LoadScene(0);
+            Time.timeScale = 1.0f;
+            SceneManager.LoadScene("LevelA1");
         }
         
         //special stuff
