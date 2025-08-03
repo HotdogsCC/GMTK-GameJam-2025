@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         StaticObjectHolder.theScoreSystem.SaveScore();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameOver.finalScore = points;
+        
+        SceneManager.LoadScene("GameOver");
     }
 }

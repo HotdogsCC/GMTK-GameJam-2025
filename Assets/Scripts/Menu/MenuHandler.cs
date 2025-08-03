@@ -39,6 +39,8 @@ namespace Menu
         private GameObject OptionsMenu;
         [SerializeField, Tooltip("The pause/main menu that is not the options menu")]
         private GameObject HomeMenu;
+        [SerializeField, Tooltip("john is smelly")]
+        private GameObject LevelSelectMenu;
 
         #region Pausing
         private bool paused = false;
@@ -187,7 +189,14 @@ namespace Menu
         /// <summary>
         /// Loads the game scene
         /// </summary>
-        public void StartGame() => SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        public void StartGame()
+        {
+            //SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+            
+            HomeMenu.SetActive(false);
+            LevelSelectMenu.SetActive(true);
+        }
+
         /// <summary>
         /// Loads the main menu scene
         /// </summary>
@@ -260,6 +269,12 @@ namespace Menu
         /// if in the game scene, set the timescale to 1 and go to the menu scene
         /// if in the menu scene, quit the game
         /// </summary>
+
+        public void LoadSceneWithName(string name)
+        {
+            SceneManager.LoadScene(name, LoadSceneMode.Single);
+        }
+        
         public void Quit()
         {
             Time.timeScale = 1;
