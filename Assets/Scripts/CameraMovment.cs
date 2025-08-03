@@ -134,7 +134,7 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         //creates the local axes of the pivot at it's position
         Debug.DrawLine(transform.position + transform.forward * 5, transform.position - transform.forward * 5, Color.blue);
