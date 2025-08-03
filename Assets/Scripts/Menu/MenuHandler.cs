@@ -79,9 +79,18 @@ namespace Menu
         /// </summary>
         public void MenuGoBack()
         {
+            //if we are in the menu, dont do anything
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                return;
+            }
+            
             EventSystem.current.SetSelectedGameObject(null);
             if (OptionsMenu.activeInHierarchy)
-                CloseOptionsMenu();
+            {
+                //CloseOptionsMenu();
+            }
+                
             else
             {
                 if (!paused)

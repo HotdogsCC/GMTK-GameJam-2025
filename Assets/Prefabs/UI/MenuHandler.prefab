@@ -51,6 +51,7 @@ MonoBehaviour:
   menuSceneName: Menu
   gameSceneName: Main
   resolutionDropdown: {fileID: 0}
-  masterMixer: {fileID: 0}
+  masterMixer: {fileID: 24100000, guid: a61827377a0838d4c92f47618df73f0f, type: 2}
   OptionsMenu: {fileID: 0}
   HomeMenu: {fileID: 0}
+  LevelSelectMenu: {fileID: 0}
