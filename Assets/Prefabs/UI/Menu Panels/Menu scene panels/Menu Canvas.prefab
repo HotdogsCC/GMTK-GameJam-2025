@@ -359,9 +359,11 @@ MonoBehaviour:
   menuSceneName: Menu
   gameSceneName: Main
   resolutionDropdown: {fileID: 1179421204284058670}
-  masterMixer: {fileID: 0}
+  MusicMixer: {fileID: 24100000, guid: a61827377a0838d4c92f47618df73f0f, type: 2}
+  SFXMixer: {fileID: 24100000, guid: 3c76729140e01bf47a7f949d2475b521, type: 2}
   OptionsMenu: {fileID: 8596898581054277481}
   HomeMenu: {fileID: 4594251476503551119}
+  LevelSelectMenu: {fileID: 0}
 --- !u!1 &512567948694104199
 GameObject:
   m_ObjectHideFlags: 0
