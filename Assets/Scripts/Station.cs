@@ -31,6 +31,8 @@ public class Station : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<MusicPlayer>().PlayStationCreated();
+        
         mesh = GetComponent<MeshRenderer>();
         stationManager = FindObjectOfType<StationManager>();
         
