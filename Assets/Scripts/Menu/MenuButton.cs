@@ -90,7 +90,7 @@ namespace Menu
                     menuHandler.StartGame();
                     break;
                 case MenuButtonType.Return:
-                    menuHandler.MenuGoBack();
+                    menuHandler.MenuGoBack(true);
                     break;
                 case MenuButtonType.Load_Game:
                     menuHandler.Load();

@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
             }
             //canvas.SetActive(controlsAreDisplayed);
         }
+
+        //is game paused?
+        if (Time.timeScale == 0.0f)
+        {
+            return;
+        }
         
         if (Input.GetKey(KeyCode.Space))
         {
@@ -43,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = currentTimeScale;
+        currentTimeScale = Time.timeScale;
         
         musicPlayer = FindObjectOfType<MusicPlayer>();
         if (musicPlayer == null)
@@ -79,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         StaticObjectHolder.theScoreSystem.SaveScore();
         GameOver.finalScore = points;
+        GameOver.previousSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
         
         SceneManager.LoadScene("GameOver");
     }
