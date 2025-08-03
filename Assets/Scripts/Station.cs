@@ -25,6 +25,11 @@ public class Station : MonoBehaviour
     [SerializeField] private Material blueMat;
     [SerializeField] private Material whiteMat;
 
+    [Header("Particles")] 
+    [SerializeField] private GameObject redParticles;
+    [SerializeField] private GameObject greenParticles;
+    [SerializeField] private GameObject blueParticles;
+
     private StationManager stationManager;
     private MeshRenderer mesh;
     
@@ -121,14 +126,17 @@ public class Station : MonoBehaviour
             case TrainColour.Red:
                 mesh.material = redMat;
                 possibleColours.Remove(TrainColour.Red);
+                Instantiate(redParticles, transform.position, transform.rotation);
                 break;
             case TrainColour.Green:
                 mesh.material = greenMat;
                 possibleColours.Remove(TrainColour.Green);
+                Instantiate(greenParticles, transform.position, transform.rotation);
                 break;
             case TrainColour.Blue:
                 mesh.material = blueMat;
                 possibleColours.Remove(TrainColour.Blue);
+                Instantiate(blueParticles, transform.position, transform.rotation);
                 break;
             case TrainColour.White:
                 mesh.material = whiteMat;
