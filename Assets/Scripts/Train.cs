@@ -39,6 +39,7 @@ public class Train : MonoBehaviour
     private float t = 0;
     private int people = 0;
 
+    private MusicPlayer musicPlayer; 
     
 
     //used for a series of speeds based on where the train is
@@ -59,6 +60,11 @@ public class Train : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        
+        musicPlayer = FindObjectOfType<MusicPlayer>();
+        musicPlayer.PlayTrainSpawn();
+        
         myTime = 0.0f;
         myTimeScale = 1.0f;
         
@@ -83,16 +89,6 @@ public class Train : MonoBehaviour
     void Update()
     {
         myTime += Time.deltaTime * myTimeScale;
-
-        if (Input.GetKeyDown(KeyCode.Y) && myTrainColour == TrainColour.Green)
-        {
-            CreateCarridge();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.U) && myTrainColour == TrainColour.Green)
-        {
-            DestoryCarridges();
-        }
         
         
         mercyTime -= Time.deltaTime;
@@ -324,6 +320,7 @@ public class Train : MonoBehaviour
 
     public void AddPeople(int toAdd)
     {
+        musicPlayer.PlayPickUp();
         people += toAdd;
 
         //figure out the amount of carriages we should have
@@ -351,6 +348,7 @@ public class Train : MonoBehaviour
 
     public void TakePeople()
     {
+        musicPlayer.PlayPassengerDropOff();
         people = 0;
         DestoryCarridges();
     }

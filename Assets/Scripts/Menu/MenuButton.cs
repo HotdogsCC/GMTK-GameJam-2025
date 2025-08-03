@@ -39,7 +39,7 @@ namespace Menu
 
             //set the text of the button to be the selected MenuButtonType text
             toggleText.text = buttonType.ToString().Replace("_", " ");
-            Debug.Log($"{toggleText.text}");
+            //Debug.Log($"{toggleText.text}");
             //remove all the listners of the button because that will cause an error
             button.onClick.RemoveAllListeners();
         }

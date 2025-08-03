@@ -31,6 +31,8 @@ public class Station : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<MusicPlayer>().PlayStationCreated();
+        
         mesh = GetComponent<MeshRenderer>();
         stationManager = FindObjectOfType<StationManager>();
         
@@ -143,7 +145,14 @@ public class Station : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
         
+        ActuallySpawnTheGuy();
         
+
+        StartCoroutine(SpawnPerson());
+    }
+
+    public void ActuallySpawnTheGuy()
+    {
         //is there room to spawn a person?
         if (peopleWaiting < spawnLocations.Length && possibleColours.Count != 0)
         {
@@ -165,8 +174,6 @@ public class Station : MonoBehaviour
                 }
             }
         }
-
-        StartCoroutine(SpawnPerson());
     }
 
     private Material GetMaterialFromColour(TrainColour colour)

@@ -9,6 +9,10 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private int pointsNeededForDoubleSpeed;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource snapSource;
+    [SerializeField] private AudioSource pickUpSource;
+    [SerializeField] private AudioSource stationCreatedSource;
+    [SerializeField] private AudioSource trainSpawnSource;
+    [SerializeField] private AudioSource dropOffSource;
 
     private void Start()
     {
@@ -35,5 +39,25 @@ public class MusicPlayer : MonoBehaviour
     public void PlaySnap()
     {
         snapSource.Play();
+    }
+
+    public void PlayPickUp()
+    {
+        pickUpSource.Play();
+    }
+
+    public void PlayStationCreated()
+    {
+        stationCreatedSource.Play();
+    }
+
+    public void PlayTrainSpawn()
+    {
+        trainSpawnSource.Play();
+    }
+
+    public void PlayPassengerDropOff()
+    {
+        dropOffSource.Play();
     }
 }
